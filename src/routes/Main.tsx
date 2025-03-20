@@ -12,6 +12,7 @@ import { NavLink, Route, Switch, useLocation } from "react-router-dom";
 import Settings from "../components/Settings";
 import Network from "../components/Network";
 import Home from "./Home";
+import Tx from "./Tx";
 
 function NavButton(props: any) {
   // fix for Invalid value for prop `navigate` on <a> tag
@@ -66,6 +67,9 @@ function Main() {
       </AppBar>
       <Container sx={{ mt: 4 }}>
         <Switch>
+          <Route path="/tx/:hash">
+            <Tx />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
