@@ -93,7 +93,7 @@ function Tx() {
   const { hash } = useParams<{ hash: string }>();
   const { currentNetwork } = useNetworkContext();
   const [result, setResult] = useState<null | { err?: string; data?: any }>(
-    null
+    null,
   );
   const [chainId, setChainId] = useState<number | undefined>(undefined);
   useEffect(() => {

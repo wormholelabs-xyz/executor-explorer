@@ -11,13 +11,13 @@ function CustomThemeProvider({ children }: { children: ReactNode }) {
     settings: { theme: themePreference },
   } = useSettingsContext();
   const [userPrefersDark, setUserPrefersDark] = useState<boolean>(
-    mediaQueryList && mediaQueryList.matches ? true : false
+    mediaQueryList && mediaQueryList.matches ? true : false,
   );
   const handleUserPreferenceChange = useCallback(
     (event: MediaQueryListEvent) => {
       setUserPrefersDark(event.matches ? true : false);
     },
-    []
+    [],
   );
   useEffect(() => {
     if (themePreference === "auto") {
@@ -25,7 +25,7 @@ function CustomThemeProvider({ children }: { children: ReactNode }) {
       return () => {
         mediaQueryList.removeEventListener(
           "change",
-          handleUserPreferenceChange
+          handleUserPreferenceChange,
         );
       };
     }
@@ -79,9 +79,9 @@ function CustomThemeProvider({ children }: { children: ReactNode }) {
               },
             },
           },
-        })
+        }),
       ),
-    [mode]
+    [mode],
   );
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

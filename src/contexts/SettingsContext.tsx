@@ -70,7 +70,7 @@ export const SettingsContextProvider = ({
       settings,
       updateTheme,
     }),
-    [settings, updateTheme]
+    [settings, updateTheme],
   );
   return (
     <SettingsContext.Provider value={value}>

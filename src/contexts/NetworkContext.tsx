@@ -45,7 +45,7 @@ export const NetworkContextProvider = ({
         }
       }
     },
-    [urlNetwork, urlParams, replace, push]
+    [urlNetwork, urlParams, replace, push],
   );
   useEffect(() => {
     // sync initial / bad param with drop down, this will do nothing when the current network matches
@@ -53,7 +53,7 @@ export const NetworkContextProvider = ({
   }, [currentNetwork, setCurrentNetwork]);
   const value = useMemo(
     () => ({ currentNetwork, setCurrentNetwork }),
-    [currentNetwork, setCurrentNetwork]
+    [currentNetwork, setCurrentNetwork],
   );
   return (
     <NetworkContext.Provider value={value}>{children}</NetworkContext.Provider>
