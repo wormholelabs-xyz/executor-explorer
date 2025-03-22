@@ -43,6 +43,13 @@ function CustomThemeProvider({ children }: { children: ReactNode }) {
             mode,
           },
           components: {
+            MuiButton: {
+              styleOverrides: {
+                root: {
+                  textTransform: "none",
+                },
+              },
+            },
             MuiCssBaseline: {
               styleOverrides: {
                 body: {

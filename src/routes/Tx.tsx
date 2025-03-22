@@ -9,8 +9,11 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ChainIdIcon from "../components/ChainIdIcon";
 import { useNetworkContext } from "../contexts/NetworkContext";
 import { useCapabilities } from "../hooks/useCapabilities";
+import { chainIdToName } from "../utils/chainIdToName";
+import prettifyAxiosError from "../utils/prettifyAxiosError";
 
 function Tx() {
   const { hash } = useParams<{ hash: string }>();
@@ -34,7 +37,9 @@ function Tx() {
           }
         } catch (e: any) {
           if (!cancelled) {
-            setResult({ err: e?.message || "An unknown error occurred" });
+            setResult({
+              err: prettifyAxiosError(e),
+            });
           }
         }
       })();
@@ -53,17 +58,30 @@ function Tx() {
         {result ? (
           result.err ? (
             <>
-              <Typography color="error">{result.err}</Typography>
+              <Typography color="error" gutterBottom>
+                {result.err}
+              </Typography>
               {!chainId && capabilitiesResult?.data ? (
                 <>
-                  Specify a supported chain:{" "}
+                  <Typography gutterBottom>
+                    This transaction was not found in the Relay Provider's
+                    database.
+                  </Typography>
+                  <Typography gutterBottom>
+                    To look it up on chain, select a supported source chain:
+                  </Typography>
                   {Object.keys(capabilitiesResult.data).map((c) => (
                     <Button
+                      variant="outlined"
+                      sx={{ mr: 1 }}
                       onClick={() => {
                         setChainId(Number(c));
                       }}
+                      startIcon={
+                        <ChainIdIcon chainId={Number(c)} size="16px" />
+                      }
                     >
-                      {c}
+                      {chainIdToName(Number(c))}
                     </Button>
                   ))}
                 </>
