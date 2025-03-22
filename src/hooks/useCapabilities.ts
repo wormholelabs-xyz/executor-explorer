@@ -5,7 +5,7 @@ import prettifyAxiosError from "../utils/prettifyAxiosError";
 
 export function useCapabilities(shouldFire: boolean) {
   const { currentNetwork } = useNetworkContext();
-  const [result, setResult] = useState<null | { err?: string; data?: object }>(
+  const [result, setResult] = useState<null | { err?: string; data?: any }>(
     null
   );
   useEffect(() => {
