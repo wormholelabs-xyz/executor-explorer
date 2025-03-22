@@ -20,7 +20,7 @@ function SettingsContent() {
     (_: any, newTheme: Theme) => {
       updateTheme(newTheme);
     },
-    [updateTheme]
+    [updateTheme],
   );
   return (
     <>

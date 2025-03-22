@@ -22,7 +22,7 @@ function NetworkContent() {
         setCurrentNetwork(e.target.value);
       }
     },
-    [setCurrentNetwork]
+    [setCurrentNetwork],
   );
   const isValid = !!network && isValidURL(network);
   return (

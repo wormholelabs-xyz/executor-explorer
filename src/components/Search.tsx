@@ -21,7 +21,7 @@ function Search() {
         push({ pathname: `/tx/${txHash}`, search });
       }
     },
-    [push, search, txHash]
+    [push, search, txHash],
   );
   return (
     <Card>
