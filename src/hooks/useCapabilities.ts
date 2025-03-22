@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNetworkContext } from "../contexts/NetworkContext";
+import prettifyAxiosError from "../utils/prettifyAxiosError";
 
 export function useCapabilities(shouldFire: boolean) {
   const { currentNetwork } = useNetworkContext();
@@ -19,7 +20,7 @@ export function useCapabilities(shouldFire: boolean) {
           }
         } catch (e: any) {
           if (!cancelled) {
-            setResult({ err: e?.message || "An unknown error occurred" });
+            setResult({ err: prettifyAxiosError(e) });
           }
         }
       })();
