@@ -8,9 +8,15 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { NavLink, Route, Switch, useLocation } from "react-router-dom";
-import Settings from "../components/Settings";
+import {
+  NavLink,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+} from "react-router-dom";
 import Network from "../components/Network";
+import Settings from "../components/Settings";
 import Home from "./Home";
 import Tx from "./Tx";
 
@@ -45,6 +51,11 @@ function NavLinks() {
   );
 }
 
+function RedirectKeepQuery() {
+  const { search } = useLocation();
+  return <Redirect to={`/${search}`} />;
+}
+
 function Main() {
   return (
     <>
@@ -67,11 +78,14 @@ function Main() {
       </AppBar>
       <Container sx={{ mt: 4 }}>
         <Switch>
-          <Route path="/tx/:hash">
+          <Route path="/tx/:hash" exact>
             <Tx />
           </Route>
-          <Route path="/">
+          <Route path="/" exact>
             <Home />
+          </Route>
+          <Route path="/">
+            <RedirectKeepQuery />
           </Route>
         </Switch>
       </Container>
