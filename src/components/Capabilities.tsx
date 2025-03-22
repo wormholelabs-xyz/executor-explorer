@@ -28,7 +28,7 @@ function Capabilities() {
             <>
               <RawView data={result.data}>
                 {Object.keys(result.data).map((c) => (
-                  <Box sx={{ mt: 2 }}>
+                  <Box key={c} sx={{ mt: 2 }}>
                     <Divider />
                     <Box
                       display="flex"
