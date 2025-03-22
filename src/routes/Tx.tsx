@@ -10,6 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNetworkContext } from "../contexts/NetworkContext";
+import { useCapabilities } from "../hooks/useCapabilities";
 
 function Tx() {
   const { hash } = useParams<{ hash: string }>();
@@ -42,33 +43,7 @@ function Tx() {
       };
     }
   }, [currentNetwork, hash, chainId]);
-  const [capabilitiesResult, setCapabilitiesResult] = useState<null | {
-    err?: string;
-    data?: object;
-  }>(null);
-  useEffect(() => {
-    if (currentNetwork && result?.err) {
-      let cancelled = false;
-      setCapabilitiesResult(null);
-      (async () => {
-        try {
-          const res = await axios.get(`${currentNetwork}/v0/capabilities`);
-          if (!cancelled) {
-            setCapabilitiesResult({ data: res.data });
-          }
-        } catch (e: any) {
-          if (!cancelled) {
-            setCapabilitiesResult({
-              err: e?.message || "An unknown error occurred",
-            });
-          }
-        }
-      })();
-      return () => {
-        cancelled = true;
-      };
-    }
-  }, [currentNetwork, result?.err]);
+  const capabilitiesResult = useCapabilities(!!result?.err);
   return (
     <Card>
       <CardContent>
