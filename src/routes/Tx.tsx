@@ -26,7 +26,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     const network = "Testnet";
     const chain = toChain(chainId);
     const chainConfig = explorer.explorerConfigs(network, chain);
-    const link = explorer.linkToTx(chain, txHash, network);
+    const link =
+      // The SDK returns a testnet link even though Solana devnet is used for Wormhole testnet
+      chain === "Solana"
+        ? explorer
+            .linkToTx(chain, txHash, network)
+            .replace("?cluster=testnet", "?cluster=devnet")
+        : explorer.linkToTx(chain, txHash, network);
     return (
       <Button
         sx={{ ml: 1 }}
