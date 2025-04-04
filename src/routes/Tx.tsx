@@ -233,33 +233,46 @@ function Tx() {
                           {d.status}
                         </Typography>
                       </Grid>
-                      <Grid size={3}>
-                        <Typography color="textDisabled" variant="body2">
-                          Executed Tx(s):
-                        </Typography>
-                      </Grid>
-                      <Grid size={9}>
-                        {d.txs.map((tx: any) => (
-                          <Box
-                            key={tx.txHash}
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            <TxAndIcon
-                              txHash={tx.txHash}
-                              chainId={tx.chainId}
-                            />
-                            <ExplorerTx
-                              txHash={tx.txHash}
-                              chainId={tx.chainId}
-                            />
-                          </Box>
-                        ))}
-                      </Grid>
                     </Grid>
+                    {d.txs && d.txs.length ? (
+                      <>
+                        <Divider sx={{ mt: 2 }} />
+                        <Grid
+                          container
+                          spacing={2}
+                          sx={{ mt: 2 }}
+                          display="flex"
+                          alignItems="center"
+                        >
+                          <Grid size={3}>
+                            <Typography color="textDisabled" variant="body2">
+                              Executed Tx(s):
+                            </Typography>
+                          </Grid>
+                          <Grid size={9}>
+                            {d.txs.map((tx: any) => (
+                              <Box
+                                key={tx.txHash}
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  flexWrap: "wrap",
+                                }}
+                              >
+                                <TxAndIcon
+                                  txHash={tx.txHash}
+                                  chainId={tx.chainId}
+                                />
+                                <ExplorerTx
+                                  txHash={tx.txHash}
+                                  chainId={tx.chainId}
+                                />
+                              </Box>
+                            ))}
+                          </Grid>
+                        </Grid>
+                      </>
+                    ) : null}
                     <Divider sx={{ mt: 2 }} />
                   </Fragment>
                 ))}

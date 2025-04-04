@@ -76,7 +76,7 @@ function Main() {
           <Settings />
         </Toolbar>
       </AppBar>
-      <Container sx={{ mt: 4 }}>
+      <Container maxWidth="xl" sx={{ mt: 4 }}>
         <Switch>
           <Route path="/tx/:hash" exact>
             <Tx />
