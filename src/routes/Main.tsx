@@ -78,7 +78,7 @@ function Main() {
       </AppBar>
       <Container maxWidth="xl" sx={{ mt: 4 }}>
         <Switch>
-          <Route path="/tx/:hash" exact>
+          <Route path={["/tx/:hash", "/chain/:id/tx/:hash"]} exact>
             <Tx />
           </Route>
           <Route path="/" exact>

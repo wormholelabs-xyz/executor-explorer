@@ -96,12 +96,14 @@ function TxAndIcon({ txHash, chainId }: { txHash: string; chainId: number }) {
 }
 
 function Tx() {
-  const { hash } = useParams<{ hash: string }>();
+  const { hash, id } = useParams<{ hash: string; id: string }>();
+  const idAsNumber = parseInt(id, 10);
+  const defaultChainId = Number.isFinite(idAsNumber) ? idAsNumber : undefined;
   const { currentNetwork } = useNetworkContext();
   const [result, setResult] = useState<null | { err?: string; data?: any }>(
     null,
   );
-  const [chainId, setChainId] = useState<number | undefined>(undefined);
+  const [chainId, setChainId] = useState<number | undefined>(defaultChainId);
   useEffect(() => {
     if (currentNetwork) {
       let cancelled = false;
