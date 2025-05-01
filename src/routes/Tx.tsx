@@ -6,18 +6,25 @@ import {
   CardContent,
   CircularProgress,
   Divider,
+  SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { explorer, toChain } from "@wormhole-foundation/sdk-base";
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChainIdIcon from "../components/ChainIdIcon";
 import RawView from "../components/RawView";
 import { useNetworkContext } from "../contexts/NetworkContext";
 import { useCapabilities } from "../hooks/useCapabilities";
 import { chainIdToName } from "../utils/chainIdToName";
+import {
+  formatBaseFee,
+  formatNativeTokens,
+  formatRequestType,
+} from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
@@ -92,6 +99,163 @@ function TxAndIcon({ txHash, chainId }: { txHash: string; chainId: number }) {
       </Box>
       {txHash}
     </Typography>
+  );
+}
+
+function GridEntry({
+  label,
+  children,
+  sx,
+}: {
+  label: string;
+  children: React.ReactNode;
+  sx?: SxProps<Theme> | undefined;
+}) {
+  return (
+    <>
+      <Grid size={3}>
+        <Typography color="textDisabled" variant="body2">
+          {label}
+        </Typography>
+      </Grid>
+      <Grid size={9} sx={sx}>
+        {children}
+      </Grid>
+    </>
+  );
+}
+
+function MonoField({ children }: { children: React.ReactNode }) {
+  return (
+    <Typography
+      variant="body2"
+      sx={{
+        fontFamily: "monospace",
+        display: "flex",
+        alignItems: "center",
+      }}
+      component="div"
+    >
+      {children}
+    </Typography>
+  );
+}
+
+function Request({ d }: { d: any }) {
+  return (
+    <>
+      <Grid
+        container
+        spacing={2}
+        sx={{ mt: 2 }}
+        display="flex"
+        alignItems="center"
+      >
+        <GridEntry
+          label="Source Tx:"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <TxAndIcon txHash={d.txHash} chainId={d.chainId} />
+          <ExplorerTx txHash={d.txHash} chainId={d.chainId} />
+          <Button
+            sx={{ ml: 1 }}
+            size="small"
+            href={`https://wormholescan.io/#/tx/${d.txHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            endIcon={<Launch />}
+          >
+            Wormholescan
+          </Button>
+        </GridEntry>
+        <GridEntry label="Status:">
+          <MonoField>
+            <Box sx={{ mr: 0.5, ml: -0.5, display: "flex" }}>
+              {d.status === "submitted" ? (
+                <CheckCircle color="success" />
+              ) : d.status === "pending" ? (
+                <HourglassTop color="disabled" />
+              ) : d.status === "failed" ? (
+                <Error color="error" />
+              ) : null}
+            </Box>
+            {d.status}
+          </MonoField>
+        </GridEntry>
+        <GridEntry label="Timestamp:">
+          <MonoField>
+            {new Date(d.requestForExecution.timestamp).toLocaleString()}
+          </MonoField>
+        </GridEntry>
+        <GridEntry label="Request Type:">
+          <MonoField>
+            {formatRequestType(d.instruction.request.prefix)}
+          </MonoField>
+        </GridEntry>
+        <GridEntry label="Amount Paid:">
+          <MonoField>
+            {formatNativeTokens(
+              d.chainId,
+              BigInt(d.requestForExecution.amtPaid),
+              BigInt(d.signedQuote.quote.srcPrice),
+            )}
+          </MonoField>
+        </GridEntry>
+        <GridEntry label="Base Fee:">
+          <MonoField>
+            {formatBaseFee(
+              d.chainId,
+              BigInt(d.signedQuote.quote.baseFee),
+              BigInt(d.signedQuote.quote.srcPrice),
+            )}
+          </MonoField>
+        </GridEntry>
+      </Grid>
+      {d.txs && d.txs.length ? (
+        <>
+          <Divider sx={{ mt: 2 }} />
+          {d.txs.map((tx: any, idx: number) => (
+            <Grid
+              key={tx.txHash}
+              container
+              spacing={2}
+              sx={{ mt: 2 }}
+              display="flex"
+              alignItems="center"
+            >
+              <GridEntry
+                label={`Executed Tx${d.txs.length > 1 ? ` [${idx + 1}/${d.txs.length}]` : ""}:`}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <TxAndIcon txHash={tx.txHash} chainId={tx.chainId} />
+                  <ExplorerTx txHash={tx.txHash} chainId={tx.chainId} />
+                </Box>
+              </GridEntry>
+              <GridEntry label="Cost:">
+                <MonoField>
+                  {formatNativeTokens(
+                    tx.chainId,
+                    BigInt(tx.cost),
+                    BigInt(d.signedQuote.quote.dstPrice),
+                  )}
+                </MonoField>
+              </GridEntry>
+            </Grid>
+          ))}
+        </>
+      ) : null}
+      <Divider sx={{ mt: 2 }} />
+    </>
   );
 }
 
@@ -174,109 +338,7 @@ function Tx() {
             <RawView data={result.data}>
               <Box>
                 {result.data.map((d: any) => (
-                  <Fragment key={d.id}>
-                    <Grid
-                      container
-                      spacing={2}
-                      sx={{ mt: 2 }}
-                      display="flex"
-                      alignItems="center"
-                    >
-                      <Grid size={3}>
-                        <Typography color="textDisabled" variant="body2">
-                          Source Tx:
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        size={9}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <TxAndIcon txHash={d.txHash} chainId={d.chainId} />
-                        <ExplorerTx txHash={d.txHash} chainId={d.chainId} />
-                        <Button
-                          sx={{ ml: 1 }}
-                          size="small"
-                          href={`https://wormholescan.io/#/tx/${d.txHash}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          endIcon={<Launch />}
-                        >
-                          Wormholescan
-                        </Button>
-                      </Grid>
-                      <Grid size={3}>
-                        <Typography color="textDisabled" variant="body2">
-                          Status:
-                        </Typography>
-                      </Grid>
-                      <Grid size={9}>
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            fontFamily: "monospace",
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                          component="div"
-                        >
-                          <Box sx={{ mr: 0.5, ml: -0.5, display: "flex" }}>
-                            {d.status === "submitted" ? (
-                              <CheckCircle color="success" />
-                            ) : d.status === "pending" ? (
-                              <HourglassTop color="disabled" />
-                            ) : d.status === "failed" ? (
-                              <Error color="error" />
-                            ) : null}
-                          </Box>
-                          {d.status}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    {d.txs && d.txs.length ? (
-                      <>
-                        <Divider sx={{ mt: 2 }} />
-                        <Grid
-                          container
-                          spacing={2}
-                          sx={{ mt: 2 }}
-                          display="flex"
-                          alignItems="center"
-                        >
-                          <Grid size={3}>
-                            <Typography color="textDisabled" variant="body2">
-                              Executed Tx(s):
-                            </Typography>
-                          </Grid>
-                          <Grid size={9}>
-                            {d.txs.map((tx: any) => (
-                              <Box
-                                key={tx.txHash}
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  flexWrap: "wrap",
-                                }}
-                              >
-                                <TxAndIcon
-                                  txHash={tx.txHash}
-                                  chainId={tx.chainId}
-                                />
-                                <ExplorerTx
-                                  txHash={tx.txHash}
-                                  chainId={tx.chainId}
-                                />
-                              </Box>
-                            ))}
-                          </Grid>
-                        </Grid>
-                      </>
-                    ) : null}
-                    <Divider sx={{ mt: 2 }} />
-                  </Fragment>
+                  <Request d={d} key={d.id} />
                 ))}
               </Box>
             </RawView>
