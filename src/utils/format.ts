@@ -23,21 +23,37 @@ export const ScaledMath = {
 const CHAIN_ID_TO_TOKEN_INFO: {
   [chainId: number]: { decimals: number; symbol: string };
 } = {
-  [chainToChainId("Solana")]: {
-    decimals: 9,
-    symbol: "SOL",
+  [chainToChainId("Arbitrum")]: {
+    decimals: 18,
+    symbol: "ETH",
   },
   [chainToChainId("Avalanche")]: {
     decimals: 18,
     symbol: "AVAX",
   },
-  [chainToChainId("Sepolia")]: {
+  [chainToChainId("Base")]: {
     decimals: 18,
     symbol: "ETH",
   },
-  [chainToChainId("BaseSepolia")]: {
+  [chainToChainId("Ethereum")]: {
     decimals: 18,
     symbol: "ETH",
+  },
+  [chainToChainId("Optimism")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("Polygon")]: {
+    decimals: 18,
+    symbol: "POS",
+  },
+  [chainToChainId("Unichain")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("Solana")]: {
+    decimals: 9,
+    symbol: "SOL",
   },
   [chainToChainId("Sui")]: {
     decimals: 9,
@@ -46,6 +62,26 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [chainToChainId("Aptos")]: {
     decimals: 8,
     symbol: "APT",
+  },
+  [chainToChainId("Sepolia")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("ArbitrumSepolia")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("BaseSepolia")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("OptimismSepolia")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("PolygonSepolia")]: {
+    decimals: 18,
+    symbol: "POS",
   },
 };
 
