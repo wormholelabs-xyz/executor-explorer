@@ -1,5 +1,5 @@
 import { SettingsEthernetOutlined } from "@mui/icons-material";
-import { Box, Dialog, IconButton, TextField } from "@mui/material";
+import { Box, Dialog, IconButton, MenuItem, TextField } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useNetworkContext } from "../contexts/NetworkContext";
 
@@ -13,9 +13,16 @@ function isValidURL(s: string) {
 }
 
 function NetworkContent() {
-  const { currentNetwork, setCurrentNetwork } = useNetworkContext();
+  const { currentEnv, currentNetwork, setCurrentEnv, setCurrentNetwork } =
+    useNetworkContext();
   const [network, setNetwork] = useState(currentNetwork);
-  const handleChange = useCallback(
+  const handleEnvChange = useCallback(
+    (e: any) => {
+      setCurrentEnv(e.target.value);
+    },
+    [setCurrentEnv],
+  );
+  const handleNetworkChange = useCallback(
     (e: any) => {
       setNetwork(e.target.value);
       if (isValidURL(e.target.value)) {
@@ -31,13 +38,26 @@ function NetworkContent() {
         <Box m={2}>
           <TextField
             value={network}
-            onChange={handleChange}
+            onChange={handleNetworkChange}
             label="Executor URL"
             margin="dense"
             error={!isValid}
             helperText={isValid ? "" : "Please enter a valid Executor URL"}
             fullWidth
           />
+        </Box>
+        <Box m={2}>
+          <TextField
+            select
+            value={currentEnv}
+            onChange={handleEnvChange}
+            label="Environment"
+            margin="dense"
+            fullWidth
+          >
+            <MenuItem value="Mainnet">Mainnet</MenuItem>
+            <MenuItem value="Testnet">Testnet</MenuItem>
+          </TextField>
         </Box>
       </Box>
     </>
