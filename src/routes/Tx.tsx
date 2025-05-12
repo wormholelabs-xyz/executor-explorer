@@ -28,18 +28,17 @@ import {
 import prettifyAxiosError from "../utils/prettifyAxiosError";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
+  const { currentEnv } = useNetworkContext();
   try {
-    // TODO: discern testnet from mainnet somehow?
-    const network = "Testnet";
     const chain = toChain(chainId);
-    const chainConfig = explorer.explorerConfigs(network, chain);
+    const chainConfig = explorer.explorerConfigs(currentEnv, chain);
     const link =
       // The SDK returns a testnet link even though Solana devnet is used for Wormhole testnet
       chain === "Solana"
         ? explorer
-            .linkToTx(chain, txHash, network)
+            .linkToTx(chain, txHash, currentEnv)
             .replace("?cluster=testnet", "?cluster=devnet")
-        : explorer.linkToTx(chain, txHash, network);
+        : explorer.linkToTx(chain, txHash, currentEnv);
     return (
       <Button
         sx={{ ml: 1 }}
@@ -56,11 +55,20 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     let link = "";
     let name = "";
     // TODO: this is a hack, update the wormhole sdk so that it has these networks
-    if (chainId === 10002) {
+    if (chainId === 30) {
+      link = `https://basescan.org/tx/${txHash}`;
+      name = "BaseScan";
+    } else if (chainId === 44) {
+      if (currentEnv === "Testnet") {
+        link = `https://sepolia.uniscan.xyz/tx/${txHash}`;
+      } else {
+        link = `https://uniscan.xyz/tx/${txHash}`;
+      }
+      name = "Uniscan";
+    } else if (chainId === 10002) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
-    }
-    if (chainId === 10004) {
+    } else if (chainId === 10004) {
       link = `https://sepolia.basescan.org/tx/${txHash}`;
       name = "BaseScan";
     }
