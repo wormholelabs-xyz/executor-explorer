@@ -1,6 +1,7 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
+import { CHAIN_ID_SONIC } from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
@@ -62,6 +63,14 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [chainToChainId("Aptos")]: {
     decimals: 8,
     symbol: "APT",
+  },
+  [chainToChainId("Linea")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [CHAIN_ID_SONIC]: {
+    decimals: 18,
+    symbol: "S",
   },
   [chainToChainId("Sepolia")]: {
     decimals: 18,

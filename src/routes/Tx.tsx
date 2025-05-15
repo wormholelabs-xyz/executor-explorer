@@ -26,6 +26,7 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
+import { CHAIN_ID_SONIC } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -55,14 +56,31 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     let link = "";
     let name = "";
     // TODO: this is a hack, update the wormhole sdk so that it has these networks
-    if (chainId === 30) {
+    if (chainId === 23) {
+      link = `https://arbiscan.io/tx/${txHash}`;
+      name = "ArbiScan";
+    } else if (chainId === 30) {
       link = `https://basescan.org/tx/${txHash}`;
       name = "BaseScan";
+    } else if (chainId === 38) {
+      if (currentEnv === "Testnet") {
+        link = `https://sepolia.lineascan.build/tx/${txHash}`;
+      } else {
+        link = `https://lineascan.build/tx/${txHash}`;
+      }
+      name = "LineaScan";
     } else if (chainId === 44) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.uniscan.xyz/tx/${txHash}`;
       } else {
         link = `https://uniscan.xyz/tx/${txHash}`;
+      }
+      name = "Uniscan";
+    } else if (chainId === CHAIN_ID_SONIC) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.sonicscan.org/tx/${txHash}`;
+      } else {
+        link = `https://sonicscan.org/tx/${txHash}`;
       }
       name = "Uniscan";
     } else if (chainId === 10002) {
