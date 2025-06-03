@@ -76,6 +76,20 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://uniscan.xyz/tx/${txHash}`;
       }
       name = "Uniscan";
+    } else if (chainId === 45) {
+      if (currentEnv === "Testnet") {
+        link = `https://sepolia.worldscan.org/tx/${txHash}`;
+      } else {
+        link = `https://worldscan.org/tx/${txHash}`;
+      }
+      name = "World Scan";
+    } else if (chainId === 47) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.purrsec.com/tx/${txHash}`;
+      } else {
+        link = `https://purrsec.com/tx/${txHash}`;
+      }
+      name = "Purrsec";
     } else if (chainId === CHAIN_ID_SONIC) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.sonicscan.org/tx/${txHash}`;

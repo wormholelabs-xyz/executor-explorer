@@ -68,6 +68,14 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "ETH",
   },
+  [chainToChainId("Worldchain")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("HyperEVM")]: {
+    decimals: 18,
+    symbol: "HYPE",
+  },
   [CHAIN_ID_SONIC]: {
     decimals: 18,
     symbol: "S",
