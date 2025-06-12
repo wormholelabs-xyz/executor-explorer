@@ -11,7 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { explorer, toChain } from "@wormhole-foundation/sdk-base";
+import {
+  chainToChainId,
+  explorer,
+  toChain,
+} from "@wormhole-foundation/sdk-base";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -26,7 +30,6 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_SONIC } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -56,51 +59,93 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     let link = "";
     let name = "";
     // TODO: this is a hack, update the wormhole sdk so that it has these networks
-    if (chainId === 23) {
+    if (chainId === chainToChainId("Arbitrum")) {
       link = `https://arbiscan.io/tx/${txHash}`;
       name = "ArbiScan";
-    } else if (chainId === 30) {
+    } else if (chainId === chainToChainId("Base")) {
       link = `https://basescan.org/tx/${txHash}`;
       name = "BaseScan";
-    } else if (chainId === 38) {
+    } else if (chainId === chainToChainId("Berachain")) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.berascan.com/tx/${txHash}`;
+      } else {
+        link = `https://berascan.com/tx/${txHash}`;
+      }
+      name = "Berascan";
+    } else if (chainId === chainToChainId("Bsc")) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.bscscan.com/tx/${txHash}`;
+      } else {
+        link = `https://bscscan.com/tx/${txHash}`;
+      }
+      name = "BscScan";
+    } else if (chainId === chainToChainId("Celo")) {
+      if (currentEnv === "Testnet") {
+        link = `https://alfajores.celoscan.io/tx/${txHash}`;
+      } else {
+        link = `https://celoscan.io/tx/${txHash}`;
+      }
+      name = "CeloScan";
+    } else if (chainId === chainToChainId("Converge")) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer-converge-testnet-1.t.conduit.xyz/tx/${txHash}`;
+      } else {
+        // mainnet is not live as of 2025-06-11
+      }
+      name = "Blockscout";
+    } else if (chainId === chainToChainId("Linea")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.lineascan.build/tx/${txHash}`;
       } else {
         link = `https://lineascan.build/tx/${txHash}`;
       }
       name = "LineaScan";
-    } else if (chainId === 44) {
+    } else if (chainId === chainToChainId("Moonbeam")) {
+      if (currentEnv === "Testnet") {
+        link = `https://moonriver.moonscan.io/tx/${txHash}`;
+      } else {
+        link = `https://moonbeam.moonscan.io/tx/${txHash}`;
+      }
+      name = "MoonScan";
+    } else if (chainId === chainToChainId("Scroll")) {
+      if (currentEnv === "Testnet") {
+        link = `https://sepolia.scrollscan.com/tx/${txHash}`;
+      } else {
+        link = `https://scrollscan.com/tx/${txHash}`;
+      }
+      name = "Scrollscan";
+    } else if (chainId === chainToChainId("Unichain")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.uniscan.xyz/tx/${txHash}`;
       } else {
         link = `https://uniscan.xyz/tx/${txHash}`;
       }
       name = "Uniscan";
-    } else if (chainId === 45) {
+    } else if (chainId === chainToChainId("Worldchain")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.worldscan.org/tx/${txHash}`;
       } else {
         link = `https://worldscan.org/tx/${txHash}`;
       }
       name = "World Scan";
-    } else if (chainId === 47) {
+    } else if (chainId === chainToChainId("HyperEVM")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.purrsec.com/tx/${txHash}`;
       } else {
         link = `https://purrsec.com/tx/${txHash}`;
       }
       name = "Purrsec";
-    } else if (chainId === CHAIN_ID_SONIC) {
+    } else if (chainId === chainToChainId("Sonic")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.sonicscan.org/tx/${txHash}`;
       } else {
         link = `https://sonicscan.org/tx/${txHash}`;
       }
       name = "Uniscan";
-    } else if (chainId === 10002) {
+    } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
-    } else if (chainId === 10004) {
+    } else if (chainId === chainToChainId("BaseSepolia")) {
       link = `https://sepolia.basescan.org/tx/${txHash}`;
       name = "BaseScan";
     }

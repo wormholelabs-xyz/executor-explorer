@@ -1,7 +1,6 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
-import { CHAIN_ID_SONIC } from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
@@ -36,9 +35,29 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "ETH",
   },
+  [chainToChainId("Berachain")]: {
+    decimals: 18,
+    symbol: "BERA",
+  },
+  [chainToChainId("Bsc")]: {
+    decimals: 18,
+    symbol: "BNB",
+  },
+  [chainToChainId("Celo")]: {
+    decimals: 18,
+    symbol: "CELO",
+  },
+  [chainToChainId("Converge")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
   [chainToChainId("Ethereum")]: {
     decimals: 18,
     symbol: "ETH",
+  },
+  [chainToChainId("Moonbeam")]: {
+    decimals: 18,
+    symbol: "GLMR",
   },
   [chainToChainId("Optimism")]: {
     decimals: 18,
@@ -47,6 +66,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [chainToChainId("Polygon")]: {
     decimals: 18,
     symbol: "POS",
+  },
+  [chainToChainId("Scroll")]: {
+    decimals: 18,
+    symbol: "ETH",
   },
   [chainToChainId("Unichain")]: {
     decimals: 18,
@@ -76,7 +99,7 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "HYPE",
   },
-  [CHAIN_ID_SONIC]: {
+  [chainToChainId("Sonic")]: {
     decimals: 18,
     symbol: "S",
   },
