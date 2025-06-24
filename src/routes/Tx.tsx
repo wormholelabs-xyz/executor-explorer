@@ -107,6 +107,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://moonbeam.moonscan.io/tx/${txHash}`;
       }
       name = "MoonScan";
+    } else if (chainId === chainToChainId("Optimism")) {
+      if (currentEnv === "Testnet") {
+        link = `https://sepolia-optimism.etherscan.io/tx/${txHash}`;
+      } else {
+        link = `https://optimistic.etherscan.io/tx/${txHash}`;
+      }
+      name = "Optimism Etherscan";
     } else if (chainId === chainToChainId("Scroll")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.scrollscan.com/tx/${txHash}`;
