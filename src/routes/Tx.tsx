@@ -30,6 +30,7 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
+import { CHAIN_ID_FOGO } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -100,6 +101,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://lineascan.build/tx/${txHash}`;
       }
       name = "LineaScan";
+    } else if (chainId === CHAIN_ID_FOGO) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer.solana.com/tx/${txHash}?cluster=custom&customUrl=https%3A%2F%2Ftestnet.fogo.io`;
+      } else {
+        // mainnet is not live as of 2025-06-24
+      }
+      name = "Fogo";
     } else if (chainId === chainToChainId("Moonbeam")) {
       if (currentEnv === "Testnet") {
         link = `https://moonriver.moonscan.io/tx/${txHash}`;
