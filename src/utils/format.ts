@@ -82,7 +82,7 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   },
   [CHAIN_ID_FOGO]: {
     decimals: 9,
-    symbol: "SOL", // Update with correct symbol later?
+    symbol: "FOGO",
   },
   [chainToChainId("Sui")]: {
     decimals: 9,

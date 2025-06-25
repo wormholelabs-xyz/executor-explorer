@@ -103,7 +103,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       name = "LineaScan";
     } else if (chainId === CHAIN_ID_FOGO) {
       if (currentEnv === "Testnet") {
-        link = `https://explorer.solana.com/tx/${txHash}?cluster=custom&customUrl=https%3A%2F%2Ftestnet.fogo.io`;
+        link = `https://explorer.fogo.io/tx/${txHash}`;
       } else {
         // mainnet is not live as of 2025-06-24
       }
