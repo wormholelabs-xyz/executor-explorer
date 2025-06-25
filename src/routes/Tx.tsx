@@ -30,7 +30,7 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_FOGO } from "../utils/consts";
+import { CHAIN_ID_CODEX, CHAIN_ID_FOGO } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -108,6 +108,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         // mainnet is not live as of 2025-06-24
       }
       name = "Fogo";
+    } else if (chainId === CHAIN_ID_CODEX) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer.codex-stg.xyz/tx/${txHash}`;
+      } else {
+        link = `https://explorer.codex.xyz/tx/${txHash}`;
+      }
+      name = "Codex";
     } else if (chainId === chainToChainId("Moonbeam")) {
       if (currentEnv === "Testnet") {
         link = `https://moonriver.moonscan.io/tx/${txHash}`;
