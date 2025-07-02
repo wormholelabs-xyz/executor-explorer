@@ -1,7 +1,7 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
-import { CHAIN_ID_CODEX, CHAIN_ID_FOGO } from "./consts";
+import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME } from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
@@ -80,13 +80,21 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 9,
     symbol: "SOL",
   },
-  [CHAIN_ID_FOGO]: {
+  [chainToChainId("Fogo")]: {
     decimals: 9,
     symbol: "FOGO",
   },
   [CHAIN_ID_CODEX]: {
     decimals: 18,
     symbol: "ETH",
+  },
+  [CHAIN_ID_PLUME]: {
+    decimals: 18,
+    symbol: "PLUME",
+  },
+  [CHAIN_ID_MEZO]: {
+    decimals: 18,
+    symbol: "BTC",
   },
   [chainToChainId("Sui")]: {
     decimals: 9,

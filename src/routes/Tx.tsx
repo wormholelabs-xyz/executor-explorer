@@ -30,7 +30,7 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_CODEX, CHAIN_ID_FOGO } from "../utils/consts";
+import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -101,7 +101,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://lineascan.build/tx/${txHash}`;
       }
       name = "LineaScan";
-    } else if (chainId === CHAIN_ID_FOGO) {
+    } else if (chainId === chainToChainId("Fogo")) {
       if (currentEnv === "Testnet") {
         link = `https://explorer.fogo.io/tx/${txHash}`;
       } else {
@@ -122,6 +122,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://moonbeam.moonscan.io/tx/${txHash}`;
       }
       name = "MoonScan";
+    } else if (chainId === CHAIN_ID_MEZO) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer.test.mezo.org/tx/${txHash}`;
+      } else {
+        link = `https://explorer.mezo.org/tx/${txHash}`;
+      }
+      name = "Mezo";
     } else if (chainId === chainToChainId("Optimism")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia-optimism.etherscan.io/tx/${txHash}`;
@@ -129,6 +136,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://optimistic.etherscan.io/tx/${txHash}`;
       }
       name = "Optimism Etherscan";
+    } else if (chainId === CHAIN_ID_PLUME) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet-explorer.plume.org/tx/${txHash}`;
+      } else {
+        link = `https://explorer.plume.org/tx/${txHash}`;
+      }
+      name = "Plume";
     } else if (chainId === chainToChainId("Scroll")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.scrollscan.com/tx/${txHash}`;
