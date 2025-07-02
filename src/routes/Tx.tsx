@@ -143,6 +143,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.plume.org/tx/${txHash}`;
       }
       name = "Plume";
+    } else if (chainId === chainToChainId("Seievm")) {
+      if (currentEnv === "Testnet") {
+        link = `https://seitrace.com/tx/${txHash}?chain=atlantic-2`;
+      } else {
+        link = `https://seitrace.com/tx/${txHash}?chain=pacific-1`;
+      }
+      name = "SeiTrace";
     } else if (chainId === chainToChainId("Scroll")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.scrollscan.com/tx/${txHash}`;
