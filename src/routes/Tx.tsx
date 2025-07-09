@@ -142,7 +142,14 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       } else {
         link = `https://explorer.plume.org/tx/${txHash}`;
       }
-      name = "Plume";
+      name = "Plume Explorer";
+    } else if (chainId === chainToChainId("Monad")) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.monadexplorer.com/tx/${txHash}`;
+      } else {
+        link = `https://monadexplorer.com/tx/${txHash}`;
+      }
+      name = "Monad Mainnet";
     } else if (chainId === chainToChainId("Seievm")) {
       if (currentEnv === "Testnet") {
         link = `https://seitrace.com/tx/${txHash}?chain=atlantic-2`;
