@@ -107,14 +107,14 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       } else {
         // mainnet is not live as of 2025-06-24
       }
-      name = "Fogo";
+      name = "Fogo Explorer";
     } else if (chainId === CHAIN_ID_CODEX) {
       if (currentEnv === "Testnet") {
         link = `https://explorer.codex-stg.xyz/tx/${txHash}`;
       } else {
         link = `https://explorer.codex.xyz/tx/${txHash}`;
       }
-      name = "Codex";
+      name = "Codex Explorer";
     } else if (chainId === chainToChainId("Moonbeam")) {
       if (currentEnv === "Testnet") {
         link = `https://moonriver.moonscan.io/tx/${txHash}`;
@@ -128,7 +128,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       } else {
         link = `https://explorer.mezo.org/tx/${txHash}`;
       }
-      name = "Mezo";
+      name = "Mezo Explorer";
     } else if (chainId === chainToChainId("Optimism")) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia-optimism.etherscan.io/tx/${txHash}`;
@@ -184,7 +184,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       } else {
         link = `https://sonicscan.org/tx/${txHash}`;
       }
-      name = "Uniscan";
+      name = "SonicScan";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
@@ -314,6 +314,11 @@ function Request({ d }: { d: any }) {
             {d.status}
           </MonoField>
         </GridEntry>
+        {d.failureCause ? (
+          <GridEntry label="Cause:">
+            <MonoField>{d.failureCause.replaceAll("_", " ")}</MonoField>
+          </GridEntry>
+        ) : null}
         <GridEntry label="Timestamp:">
           <MonoField>
             {new Date(d.requestForExecution.timestamp).toLocaleString()}
