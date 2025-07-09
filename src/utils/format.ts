@@ -96,6 +96,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "BTC",
   },
+  [chainToChainId("Monad")]: {
+    decimals: 18,
+    symbol: "MON",
+  },
   [chainToChainId("Sui")]: {
     decimals: 9,
     symbol: "SUI",
