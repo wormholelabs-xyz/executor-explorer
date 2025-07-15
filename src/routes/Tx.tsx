@@ -198,6 +198,12 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     } else if (chainId === chainToChainId("BaseSepolia")) {
       link = `https://sepolia.basescan.org/tx/${txHash}`;
       name = "BaseScan";
+    } else if (chainId === chainToChainId("ArbitrumSepolia")) {
+      link = `https://sepolia.arbiscan.io/tx/${txHash}`;
+      name = "ArbiScan";
+    } else if (chainId === chainToChainId("OptimismSepolia")) {
+      link = `https://sepolia-optimism.etherscan.io/tx/${txHash}`;
+      name = "Optimism Etherscan";
     }
     if (link) {
       return (
