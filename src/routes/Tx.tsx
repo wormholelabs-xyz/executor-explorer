@@ -30,7 +30,12 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME } from "../utils/consts";
+import {
+  CHAIN_ID_CODEX,
+  CHAIN_ID_MEZO,
+  CHAIN_ID_PLUME,
+  CHAIN_ID_XRPLEVM,
+} from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -143,6 +148,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.plume.org/tx/${txHash}`;
       }
       name = "Plume Explorer";
+    } else if (chainId === CHAIN_ID_XRPLEVM) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer.testnet.xrplevm.org/tx/${txHash}`;
+      } else {
+        link = `https://explorer.xrplevm.org/tx/${txHash}`;
+      }
+      name = "XRPLEVM Explorer";
     } else if (chainId === chainToChainId("Monad")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.monadexplorer.com/tx/${txHash}`;
