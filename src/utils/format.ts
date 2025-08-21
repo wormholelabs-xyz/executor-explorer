@@ -1,7 +1,7 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
-import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME } from "./consts";
+import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME, CHAIN_ID_XRPLEVM } from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
@@ -95,6 +95,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [CHAIN_ID_MEZO]: {
     decimals: 18,
     symbol: "BTC",
+  },
+  [CHAIN_ID_XRPLEVM]: {
+    decimals: 18,
+    symbol: "XRP",
   },
   [chainToChainId("Monad")]: {
     decimals: 18,

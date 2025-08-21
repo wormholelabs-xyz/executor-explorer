@@ -5,3 +5,6 @@ export const CHAIN_ID_MEZO = 50;
 
 // https://github.com/wormhole-foundation/wormhole/blob/08d600253fc90800cbf6872f450b8b92d9cf49e3/sdk/vaa/structs.go#L688
 export const CHAIN_ID_PLUME = 55;
+
+// https://github.com/wormhole-foundation/wormhole/blob/57c3922ccbe36d07a646d4f0552e903f95fe9f15/sdk/vaa/structs.go#L313C2-L313C29
+export const CHAIN_ID_XRPLEVM = 57;
