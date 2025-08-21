@@ -30,7 +30,12 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME, CHAIN_ID_XRPLEVM } from "../utils/consts";
+import {
+  CHAIN_ID_CODEX,
+  CHAIN_ID_MEZO,
+  CHAIN_ID_PLUME,
+  CHAIN_ID_XRPLEVM,
+} from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();

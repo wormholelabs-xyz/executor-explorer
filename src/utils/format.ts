@@ -1,7 +1,12 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
-import { CHAIN_ID_CODEX, CHAIN_ID_MEZO, CHAIN_ID_PLUME, CHAIN_ID_XRPLEVM } from "./consts";
+import {
+  CHAIN_ID_CODEX,
+  CHAIN_ID_MEZO,
+  CHAIN_ID_PLUME,
+  CHAIN_ID_XRPLEVM,
+} from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
