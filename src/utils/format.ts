@@ -71,7 +71,7 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   },
   [chainToChainId("Polygon")]: {
     decimals: 18,
-    symbol: "POS",
+    symbol: "POL",
   },
   [chainToChainId("Scroll")]: {
     decimals: 18,
@@ -155,7 +155,7 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   },
   [chainToChainId("PolygonSepolia")]: {
     decimals: 18,
-    symbol: "POS",
+    symbol: "POL",
   },
 };
 
