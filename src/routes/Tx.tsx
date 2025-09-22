@@ -286,6 +286,7 @@ function MonoField({ children }: { children: React.ReactNode }) {
         fontFamily: "monospace",
         display: "flex",
         alignItems: "center",
+        overflowX: "auto",
       }}
       component="div"
     >
@@ -342,6 +343,11 @@ function Request({ d }: { d: any }) {
         {d.failureCause ? (
           <GridEntry label="Cause:">
             <MonoField>{d.failureCause.replaceAll("_", " ")}</MonoField>
+          </GridEntry>
+        ) : null}
+        {d.failureMessage ? (
+          <GridEntry label="Message:">
+            <MonoField>{d.failureMessage}</MonoField>
           </GridEntry>
         ) : null}
         <GridEntry label="Timestamp:">
