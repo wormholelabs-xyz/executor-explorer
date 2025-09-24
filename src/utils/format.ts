@@ -133,6 +133,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "S",
   },
+  [chainToChainId("Ink")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
   [chainToChainId("Seievm")]: {
     decimals: 18,
     symbol: "SEI",
