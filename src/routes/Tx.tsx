@@ -155,6 +155,20 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.xrplevm.org/tx/${txHash}`;
       }
       name = "XRPLEVM Explorer";
+    } else if (chainId === chainToChainId("CreditCoin")) {
+      if (currentEnv === "Testnet") {
+        link = `https://creditcoin-testnet.blockscout.com/tx/${txHash}`;
+      } else {
+        link = `https://creditcoin.blockscout.com/tx/${txHash}`;
+      }
+      name = "CreditCoin Explorer";
+    } else if (chainId === chainToChainId("Ink")) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer-sepolia.inkonchain.com/tx/${txHash}`;
+      } else {
+        link = `https://explorer.inkonchain.com/tx/${txHash}`;
+      }
+      name = "Ink Explorer";
     } else if (chainId === chainToChainId("Monad")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.monadexplorer.com/tx/${txHash}`;
