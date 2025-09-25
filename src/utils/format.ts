@@ -137,6 +137,14 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "SEI",
   },
+  [chainToChainId("Ink")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [chainToChainId("CreditCoin")]: {
+    decimals: 18,
+    symbol: "CTC",
+  },
   [chainToChainId("Sepolia")]: {
     decimals: 18,
     symbol: "ETH",
