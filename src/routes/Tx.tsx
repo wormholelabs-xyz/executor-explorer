@@ -419,6 +419,9 @@ function Request({ d }: { d: any }) {
                   <ExplorerTx txHash={tx.txHash} chainId={tx.chainId} />
                 </Box>
               </GridEntry>
+              <GridEntry label="Timestamp:">
+                <MonoField>{new Date(tx.blockTime).toLocaleString()}</MonoField>
+              </GridEntry>
               <GridEntry label="Cost:">
                 <MonoField>
                   {formatNativeTokens(
