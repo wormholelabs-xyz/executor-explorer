@@ -175,7 +175,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       } else {
         link = `https://monadexplorer.com/tx/${txHash}`;
       }
-      name = "Monad Mainnet";
+      name = "MonVision";
     } else if (chainId === chainToChainId("Seievm")) {
       if (currentEnv === "Testnet") {
         link = `https://seitrace.com/tx/${txHash}?chain=atlantic-2`;
