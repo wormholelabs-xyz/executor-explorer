@@ -145,6 +145,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "CTC",
   },
+  [chainToChainId("Moca")]: {
+    decimals: 18,
+    symbol: "MOCA",
+  },
   [chainToChainId("Sepolia")]: {
     decimals: 18,
     symbol: "ETH",
