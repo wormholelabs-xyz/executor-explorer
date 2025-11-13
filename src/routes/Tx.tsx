@@ -110,7 +110,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       if (currentEnv === "Testnet") {
         link = `https://explorer.fogo.io/tx/${txHash}`;
       } else {
-        // mainnet is not live as of 2025-06-24
+        link = `https://explorer.fogo.io/tx/${txHash}?cluster=mainnet-beta`;
       }
       name = "Fogo Explorer";
     } else if (chainId === CHAIN_ID_CODEX) {
