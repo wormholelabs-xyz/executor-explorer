@@ -218,6 +218,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://sonicscan.org/tx/${txHash}`;
       }
       name = "SonicScan";
+    } else if (chainId === chainToChainId("Moca")) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet-scan.mocachain.org/tx/${txHash}`;
+      } else {
+        link = `https://scan.mocachain.org/tx/${txHash}`;
+      }
+      name = "Moca Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
