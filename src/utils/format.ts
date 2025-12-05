@@ -174,6 +174,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "POL",
   },
+  [chainToChainId("Stacks")]: {
+    decimals: 6,
+    symbol: "STX",
+  },
 };
 
 function tokensToUsd(amount: bigint, decimals: number, price: bigint) {

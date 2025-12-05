@@ -233,6 +233,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://scan.mocachain.org/tx/${txHash}`;
       }
       name = "Moca Explorer";
+    } else if (chainId === chainToChainId("Stacks")) {
+      if (currentEnv === "Testnet") {
+        link = `https://explorer.hiro.so/txid/${txHash}?chain=testnet`;
+      } else {
+        link = `https://explorer.hiro.so/txid/${txHash}?chain=mainnet`;
+      }
+      name = "Stacks Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
