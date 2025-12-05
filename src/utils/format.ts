@@ -6,6 +6,7 @@ import {
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPLEVM,
+  CHIAN_ID_MEGAETH,
 } from "./consts";
 
 export const ScaledMath = {
@@ -90,6 +91,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     symbol: "FOGO",
   },
   [CHAIN_ID_CODEX]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
+  [CHIAN_ID_MEGAETH]: {
     decimals: 18,
     symbol: "ETH",
   },

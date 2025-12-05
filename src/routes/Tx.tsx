@@ -35,6 +35,7 @@ import {
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPLEVM,
+  CHIAN_ID_MEGAETH,
 } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
@@ -155,6 +156,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.xrplevm.org/tx/${txHash}`;
       }
       name = "XRPLEVM Explorer";
+    } else if (chainId === CHIAN_ID_MEGAETH) {
+      if (currentEnv === "Testnet") {
+        link = `https://megaeth-testnet-v2.blockscout.com/tx/${txHash}`;
+      } else {
+        link = `https://megaeth-testnet-v3.blockscout.com/tx/${txHash}`;
+      }
+      name = "MegaETH Explorer";
     } else if (chainId === chainToChainId("CreditCoin")) {
       if (currentEnv === "Testnet") {
         link = `https://creditcoin-testnet.blockscout.com/tx/${txHash}`;
