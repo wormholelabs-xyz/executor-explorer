@@ -160,7 +160,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       if (currentEnv === "Testnet") {
         link = `https://megaeth-testnet-v2.blockscout.com/tx/${txHash}`;
       } else {
-        link = `https://megaeth-testnet-v3.blockscout.com/tx/${txHash}`;
+        link = `https://megaeth.blockscout.com/tx/${txHash}`;
       }
       name = "MegaETH Explorer";
     } else if (chainId === chainToChainId("CreditCoin")) {
