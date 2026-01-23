@@ -6,6 +6,7 @@ import {
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPLEVM,
+  CHIAN_ID_DOGECOIN,
   CHIAN_ID_MEGAETH,
 } from "./consts";
 
@@ -177,6 +178,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [chainToChainId("Stacks")]: {
     decimals: 6,
     symbol: "STX",
+  },
+  [CHIAN_ID_DOGECOIN]: {
+    decimals: 8,
+    symbol: "DOGE",
   },
 };
 
