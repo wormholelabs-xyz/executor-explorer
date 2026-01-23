@@ -11,3 +11,6 @@ export const CHAIN_ID_XRPLEVM = 57;
 
 // https://github.com/wormhole-foundation/wormhole/blob/0833a73fc51754a3698ceaffd61c88721f8bb006/sdk/vaa/structs.go#L327
 export const CHIAN_ID_MEGAETH = 64;
+
+// https://github.com/wormhole-foundation/wormhole/blob/48f9bd95cc4b6281be4f4df7d75dd9e64f477397/sdk/vaa/structs.go#L329
+export const CHIAN_ID_DOGECOIN = 65;

@@ -35,6 +35,7 @@ import {
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPLEVM,
+  CHIAN_ID_DOGECOIN,
   CHIAN_ID_MEGAETH,
 } from "../utils/consts";
 
@@ -240,6 +241,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.hiro.so/txid/${txHash}?chain=mainnet`;
       }
       name = "Stacks Explorer";
+    } else if (chainId === CHIAN_ID_DOGECOIN) {
+      if (currentEnv === "Testnet") {
+        link = `https://doge-testnet-explorer.qed.me/tx/${txHash}`;
+      } else {
+        link = `https://doge-explorer.qed.me/tx/${txHash}`;
+      }
+      name = "Doge Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
