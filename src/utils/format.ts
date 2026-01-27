@@ -6,6 +6,7 @@ import {
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPLEVM,
+  CHAIN_ID_ZEROGRAVITY,
   CHIAN_ID_DOGECOIN,
   CHIAN_ID_MEGAETH,
 } from "./consts";
@@ -182,6 +183,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [CHIAN_ID_DOGECOIN]: {
     decimals: 8,
     symbol: "DOGE",
+  },
+  [CHAIN_ID_ZEROGRAVITY]: {
+    decimals: 18,
+    symbol: "0G",
   },
 };
 

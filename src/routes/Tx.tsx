@@ -35,6 +35,7 @@ import {
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPLEVM,
+  CHAIN_ID_ZEROGRAVITY,
   CHIAN_ID_DOGECOIN,
   CHIAN_ID_MEGAETH,
 } from "../utils/consts";
@@ -248,6 +249,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://doge-explorer.qed.me/tx/${txHash}`;
       }
       name = "Doge Explorer";
+    } else if (chainId === CHAIN_ID_ZEROGRAVITY) {
+      if (currentEnv === "Testnet") {
+        link = `https://chainscan-galileo.0g.ai/tx/${txHash}`;
+      } else {
+        link = `https://chainscan.0g.ai/tx/${txHash}`;
+      }
+      name = "0G Blockchain Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
