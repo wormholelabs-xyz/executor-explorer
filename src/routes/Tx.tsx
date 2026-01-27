@@ -264,10 +264,10 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     } else if (chainId === chainToChainId("OptimismSepolia")) {
       link = `https://sepolia-optimism.etherscan.io/tx/${txHash}`;
       name = "Optimism Etherscan";
-    }else if (chainId === chainToChainId("MonadTestnet")) {
+    } else if (chainId === chainToChainId("MonadTestnet")) {
       link = `https://testnet.monadexplorer.com/tx/${txHash}`;
       name = "MonVision";
-    } 
+    }
     if (link) {
       return (
         <Button
