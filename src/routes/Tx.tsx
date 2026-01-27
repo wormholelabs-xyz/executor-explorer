@@ -180,11 +180,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
       }
       name = "Ink Explorer";
     } else if (chainId === chainToChainId("Monad")) {
-      if (currentEnv === "Testnet") {
-        link = `https://testnet.monadexplorer.com/tx/${txHash}`;
-      } else {
-        link = `https://monadexplorer.com/tx/${txHash}`;
-      }
+      link = `https://monadexplorer.com/tx/${txHash}`;
       name = "MonVision";
     } else if (chainId === chainToChainId("Seievm")) {
       if (currentEnv === "Testnet") {
@@ -268,6 +264,9 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     } else if (chainId === chainToChainId("OptimismSepolia")) {
       link = `https://sepolia-optimism.etherscan.io/tx/${txHash}`;
       name = "Optimism Etherscan";
+    } else if (chainId === chainToChainId("MonadTestnet")) {
+      link = `https://testnet.monadexplorer.com/tx/${txHash}`;
+      name = "MonVision";
     }
     if (link) {
       return (

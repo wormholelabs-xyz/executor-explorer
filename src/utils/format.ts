@@ -176,6 +176,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "POL",
   },
+  [chainToChainId("MonadTestnet")]: {
+    decimals: 18,
+    symbol: "MON",
+  },
   [chainToChainId("Stacks")]: {
     decimals: 6,
     symbol: "STX",
