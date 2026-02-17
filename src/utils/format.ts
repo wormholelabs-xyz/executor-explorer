@@ -5,6 +5,7 @@ import {
   CHAIN_ID_CODEX,
   CHAIN_ID_MEZO,
   CHAIN_ID_PLUME,
+  CHAIN_ID_XRPL,
   CHAIN_ID_XRPLEVM,
   CHAIN_ID_ZEROGRAVITY,
   CHIAN_ID_DOGECOIN,
@@ -183,6 +184,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [chainToChainId("Stacks")]: {
     decimals: 6,
     symbol: "STX",
+  },
+  [CHAIN_ID_XRPL]: {
+    decimals: 6,
+    symbol: "XRP",
   },
   [CHIAN_ID_DOGECOIN]: {
     decimals: 8,
