@@ -15,5 +15,8 @@ export const CHIAN_ID_MEGAETH = 64;
 // https://github.com/wormhole-foundation/wormhole/blob/48f9bd95cc4b6281be4f4df7d75dd9e64f477397/sdk/vaa/structs.go#L329
 export const CHIAN_ID_DOGECOIN = 65;
 
+// https://github.com/wormhole-foundation/wormhole/blob/e5947bb1bee40e573a022ef37a92e59fec1b1422/sdk/vaa/structs.go#L331
+export const CHAIN_ID_XRPL = 66;
+
 // https://github.com/wormhole-foundation/wormhole/blob/main/sdk/vaa/structs.go#L333
 export const CHAIN_ID_ZEROGRAVITY = 67;
