@@ -17,7 +17,7 @@ import {
   toChain,
 } from "@wormhole-foundation/sdk-base";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChainIdIcon from "../components/ChainIdIcon";
 import RawView from "../components/RawView";
@@ -521,6 +521,17 @@ function Tx() {
     }
   }, [currentNetwork, hash, chainId]);
   const capabilitiesResult = useCapabilities(!!result?.err);
+  const sortedData = useMemo(
+    () =>
+      result?.data
+        ? [...result.data].sort(
+            (a: any, b: any) =>
+              new Date(a.requestForExecution.timestamp).getTime() -
+              new Date(b.requestForExecution.timestamp).getTime(),
+          )
+        : [],
+    [result?.data],
+  );
   return (
     <Card>
       <CardContent>
@@ -563,15 +574,9 @@ function Tx() {
           ) : (
             <RawView data={result.data}>
               <Box>
-                {[...result.data]
-                  .sort(
-                    (a: any, b: any) =>
-                      new Date(a.requestForExecution.timestamp).getTime() -
-                      new Date(b.requestForExecution.timestamp).getTime(),
-                  )
-                  .map((d: any) => (
-                    <Request d={d} key={d.id} />
-                  ))}
+                {sortedData.map((d: any) => (
+                  <Request d={d} key={d.id} />
+                ))}
               </Box>
             </RawView>
           )
