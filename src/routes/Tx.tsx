@@ -563,9 +563,15 @@ function Tx() {
           ) : (
             <RawView data={result.data}>
               <Box>
-                {result.data.map((d: any) => (
-                  <Request d={d} key={d.id} />
-                ))}
+                {[...result.data]
+                  .sort(
+                    (a: any, b: any) =>
+                      new Date(a.requestForExecution.timestamp).getTime() -
+                      new Date(b.requestForExecution.timestamp).getTime(),
+                  )
+                  .map((d: any) => (
+                    <Request d={d} key={d.id} />
+                  ))}
               </Box>
             </RawView>
           )
