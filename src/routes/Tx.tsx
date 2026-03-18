@@ -442,41 +442,46 @@ function Request({ d }: { d: any }) {
         <>
           <Divider sx={{ mt: 2 }} />
           {d.txs.map((tx: any, idx: number) => (
-            <Grid
-              key={tx.txHash}
-              container
-              spacing={2}
-              sx={{ mt: 2 }}
-              display="flex"
-              alignItems="center"
-            >
-              <GridEntry
-                label={`Executed Tx${d.txs.length > 1 ? ` [${idx + 1}/${d.txs.length}]` : ""}:`}
+            <>
+              <Grid
+                key={tx.txHash}
+                container
+                spacing={2}
+                sx={{ mt: 2 }}
+                display="flex"
+                alignItems="center"
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
+                <GridEntry
+                  label={`Executed Tx${d.txs.length > 1 ? ` [${idx + 1}/${d.txs.length}]` : ""}:`}
                 >
-                  <TxAndIcon txHash={tx.txHash} chainId={tx.chainId} />
-                  <ExplorerTx txHash={tx.txHash} chainId={tx.chainId} />
-                </Box>
-              </GridEntry>
-              <GridEntry label="Timestamp:">
-                <MonoField>{new Date(tx.blockTime).toLocaleString()}</MonoField>
-              </GridEntry>
-              <GridEntry label="Cost:">
-                <MonoField>
-                  {formatNativeTokens(
-                    tx.chainId,
-                    BigInt(tx.cost),
-                    BigInt(d.signedQuote.quote.dstPrice),
-                  )}
-                </MonoField>
-              </GridEntry>
-            </Grid>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <TxAndIcon txHash={tx.txHash} chainId={tx.chainId} />
+                    <ExplorerTx txHash={tx.txHash} chainId={tx.chainId} />
+                  </Box>
+                </GridEntry>
+                <GridEntry label="Timestamp:">
+                  <MonoField>
+                    {new Date(tx.blockTime).toLocaleString()}
+                  </MonoField>
+                </GridEntry>
+                <GridEntry label="Cost:">
+                  <MonoField>
+                    {formatNativeTokens(
+                      tx.chainId,
+                      BigInt(tx.cost),
+                      BigInt(d.signedQuote.quote.dstPrice),
+                    )}
+                  </MonoField>
+                </GridEntry>
+              </Grid>
+              <InternalTx hash={tx.txHash} defaultChainId={tx.chainId} />
+            </>
           ))}
         </>
       ) : null}
@@ -485,10 +490,17 @@ function Request({ d }: { d: any }) {
   );
 }
 
-function Tx() {
-  const { hash, id } = useParams<{ hash: string; id: string }>();
-  const idAsNumber = parseInt(id, 10);
-  const defaultChainId = Number.isFinite(idAsNumber) ? idAsNumber : undefined;
+function CoreTx({
+  hash,
+  defaultChainId,
+  hideError,
+  hideLoader,
+}: {
+  hash: string;
+  defaultChainId?: number;
+  hideError?: boolean;
+  hideLoader?: boolean;
+}) {
   const { currentNetwork } = useNetworkContext();
   const [result, setResult] = useState<null | { err?: string; data?: any }>(
     null,
@@ -532,59 +544,84 @@ function Tx() {
         : [],
     [result?.data],
   );
+  return result ? (
+    result.err ? (
+      hideError ? null : (
+        <>
+          <Typography color="error" gutterBottom>
+            {result.err}
+          </Typography>
+          {!chainId && capabilitiesResult?.data ? (
+            <>
+              <Typography gutterBottom>
+                This transaction was not found in the Relay Provider's database.
+              </Typography>
+              <Typography gutterBottom>
+                To look it up on chain, select a supported source chain:
+              </Typography>
+              {Object.keys(capabilitiesResult.data).map((c) => (
+                <Button
+                  key={c}
+                  variant="outlined"
+                  sx={{ mr: 1 }}
+                  onClick={() => {
+                    setChainId(Number(c));
+                  }}
+                  startIcon={<ChainIdIcon chainId={Number(c)} size="16px" />}
+                >
+                  {chainIdToName(Number(c))}
+                </Button>
+              ))}
+            </>
+          ) : null}
+        </>
+      )
+    ) : (
+      <RawView data={result.data}>
+        <Box>
+          {sortedData.map((d: any) => (
+            <Request d={d} key={d.id} />
+          ))}
+        </Box>
+      </RawView>
+    )
+  ) : hideLoader ? null : (
+    <Box display="flex" alignItems="center" justifyContent="center">
+      <CircularProgress />
+    </Box>
+  );
+}
+
+function InternalTx({
+  hash,
+  defaultChainId,
+}: {
+  hash: string;
+  defaultChainId?: number;
+}) {
+  return (
+    <Box my={2} pl={2} borderLeft="1px solid gray">
+      <CoreTx
+        hash={hash}
+        defaultChainId={defaultChainId}
+        hideError
+        hideLoader
+      />
+    </Box>
+  );
+}
+
+function Tx() {
+  const { hash, id } = useParams<{ hash: string; id: string }>();
+  const idAsNumber = parseInt(id, 10);
+  const defaultChainId = Number.isFinite(idAsNumber) ? idAsNumber : undefined;
   return (
     <Card>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h1">
           Transaction Details
         </Typography>
-        {result ? (
-          result.err ? (
-            <>
-              <Typography color="error" gutterBottom>
-                {result.err}
-              </Typography>
-              {!chainId && capabilitiesResult?.data ? (
-                <>
-                  <Typography gutterBottom>
-                    This transaction was not found in the Relay Provider's
-                    database.
-                  </Typography>
-                  <Typography gutterBottom>
-                    To look it up on chain, select a supported source chain:
-                  </Typography>
-                  {Object.keys(capabilitiesResult.data).map((c) => (
-                    <Button
-                      key={c}
-                      variant="outlined"
-                      sx={{ mr: 1 }}
-                      onClick={() => {
-                        setChainId(Number(c));
-                      }}
-                      startIcon={
-                        <ChainIdIcon chainId={Number(c)} size="16px" />
-                      }
-                    >
-                      {chainIdToName(Number(c))}
-                    </Button>
-                  ))}
-                </>
-              ) : null}
-            </>
-          ) : (
-            <RawView data={result.data}>
-              <Box>
-                {sortedData.map((d: any) => (
-                  <Request d={d} key={d.id} />
-                ))}
-              </Box>
-            </RawView>
-          )
-        ) : (
-          <Box display="flex" alignItems="center" justifyContent="center">
-            <CircularProgress />
-          </Box>
-        )}
+        <CoreTx hash={hash} defaultChainId={defaultChainId} />
       </CardContent>
     </Card>
   );
