@@ -20,3 +20,6 @@ export const CHAIN_ID_XRPL = 66;
 
 // https://github.com/wormhole-foundation/wormhole/blob/main/sdk/vaa/structs.go#L333
 export const CHAIN_ID_ZEROGRAVITY = 67;
+
+// Wormhole Chain ID 69, EVM Chain ID 3945
+export const CHAIN_ID_NEXUS = 69;

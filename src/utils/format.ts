@@ -4,6 +4,7 @@ import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
 import {
   CHAIN_ID_CODEX,
   CHAIN_ID_MEZO,
+  CHAIN_ID_NEXUS,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPL,
   CHAIN_ID_XRPLEVM,
@@ -196,6 +197,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [CHAIN_ID_ZEROGRAVITY]: {
     decimals: 18,
     symbol: "0G",
+  },
+  [CHAIN_ID_NEXUS]: {
+    decimals: 18,
+    symbol: "NEX",
   },
 };
 
