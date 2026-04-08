@@ -33,6 +33,7 @@ import prettifyAxiosError from "../utils/prettifyAxiosError";
 import {
   CHAIN_ID_CODEX,
   CHAIN_ID_MEZO,
+  CHAIN_ID_NEXUS,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPL,
   CHAIN_ID_XRPLEVM,
@@ -260,6 +261,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://chainscan.0g.ai/tx/${txHash}`;
       }
       name = "0G Blockchain Explorer";
+    } else if (chainId === CHAIN_ID_NEXUS) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.explorer.nexus.xyz/tx/${txHash}`;
+      } else {
+        // mainnet is not live yet
+      }
+      name = "Nexus Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";

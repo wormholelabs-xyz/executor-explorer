@@ -2,6 +2,7 @@ import { toChain } from "@wormhole-foundation/sdk-base";
 import {
   CHAIN_ID_CODEX,
   CHAIN_ID_MEZO,
+  CHAIN_ID_NEXUS,
   CHAIN_ID_PLUME,
   CHAIN_ID_XRPL,
   CHAIN_ID_XRPLEVM,
@@ -30,6 +31,9 @@ export const chainIdToName = (chainId: number) => {
   }
   if (chainId === CHAIN_ID_ZEROGRAVITY) {
     return `0G (${chainId})`;
+  }
+  if (chainId === CHAIN_ID_NEXUS) {
+    return `Nexus (${chainId})`;
   }
   try {
     return `${toChain(chainId)} (${chainId})`;
