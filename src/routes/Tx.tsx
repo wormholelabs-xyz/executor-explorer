@@ -30,17 +30,7 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import {
-  CHAIN_ID_CODEX,
-  CHAIN_ID_MEZO,
-  CHAIN_ID_NEXUS,
-  CHAIN_ID_PLUME,
-  CHAIN_ID_XRPL,
-  CHAIN_ID_XRPLEVM,
-  CHAIN_ID_ZEROGRAVITY,
-  CHIAN_ID_DOGECOIN,
-  CHIAN_ID_MEGAETH,
-} from "../utils/consts";
+import { CHAIN_ID_CODEX, CHIAN_ID_DOGECOIN } from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -132,7 +122,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://moonbeam.moonscan.io/tx/${txHash}`;
       }
       name = "MoonScan";
-    } else if (chainId === CHAIN_ID_MEZO) {
+    } else if (chainId === chainToChainId("Mezo")) {
       if (currentEnv === "Testnet") {
         link = `https://explorer.test.mezo.org/tx/${txHash}`;
       } else {
@@ -146,21 +136,21 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://optimistic.etherscan.io/tx/${txHash}`;
       }
       name = "Optimism Etherscan";
-    } else if (chainId === CHAIN_ID_PLUME) {
+    } else if (chainId === chainToChainId("Plume")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet-explorer.plume.org/tx/${txHash}`;
       } else {
         link = `https://explorer.plume.org/tx/${txHash}`;
       }
       name = "Plume Explorer";
-    } else if (chainId === CHAIN_ID_XRPLEVM) {
+    } else if (chainId === chainToChainId("XRPLEVM")) {
       if (currentEnv === "Testnet") {
         link = `https://explorer.testnet.xrplevm.org/tx/${txHash}`;
       } else {
         link = `https://explorer.xrplevm.org/tx/${txHash}`;
       }
       name = "XRPLEVM Explorer";
-    } else if (chainId === CHIAN_ID_MEGAETH) {
+    } else if (chainId === chainToChainId("MegaETH")) {
       if (currentEnv === "Testnet") {
         link = `https://megaeth-testnet-v2.blockscout.com/tx/${txHash}`;
       } else {
@@ -247,27 +237,32 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://doge-explorer.qed.me/tx/${txHash}`;
       }
       name = "Doge Explorer";
-    } else if (chainId === CHAIN_ID_XRPL) {
+    } else if (chainId === chainToChainId("Xrpl")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.xrpl.org/transactions/${txHash}`;
       } else {
         link = `https://livenet.xrpl.org/transactions/${txHash}`;
       }
       name = "XRPL Explorer";
-    } else if (chainId === CHAIN_ID_ZEROGRAVITY) {
+    } else if (chainId === chainToChainId("ZeroGravity")) {
       if (currentEnv === "Testnet") {
         link = `https://chainscan-galileo.0g.ai/tx/${txHash}`;
       } else {
         link = `https://chainscan.0g.ai/tx/${txHash}`;
       }
       name = "0G Blockchain Explorer";
-    } else if (chainId === CHAIN_ID_NEXUS) {
+    } else if (chainId === chainToChainId("Nexus")) {
       if (currentEnv === "Testnet") {
         link = `https://testnet.explorer.nexus.xyz/tx/${txHash}`;
       } else {
         // mainnet is not live yet
       }
       name = "Nexus Explorer";
+    } else if (chainId === chainToChainId("Tempo")) {
+      if (currentEnv === "Testnet") {
+        link = `https://explore.moderato.tempo.xyz/tx/${txHash}`;
+      }
+      name = "Tempo Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
       link = `https://sepolia.etherscan.io/tx/${txHash}`;
       name = "Etherscan";
