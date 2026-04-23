@@ -1,17 +1,7 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
-import {
-  CHAIN_ID_CODEX,
-  CHAIN_ID_MEZO,
-  CHAIN_ID_NEXUS,
-  CHAIN_ID_PLUME,
-  CHAIN_ID_XRPL,
-  CHAIN_ID_XRPLEVM,
-  CHAIN_ID_ZEROGRAVITY,
-  CHIAN_ID_DOGECOIN,
-  CHIAN_ID_MEGAETH,
-} from "./consts";
+import { CHAIN_ID_CODEX, CHIAN_ID_DOGECOIN } from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
@@ -98,19 +88,19 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "ETH",
   },
-  [CHIAN_ID_MEGAETH]: {
+  [chainToChainId("MegaETH")]: {
     decimals: 18,
     symbol: "ETH",
   },
-  [CHAIN_ID_PLUME]: {
+  [chainToChainId("Plume")]: {
     decimals: 18,
     symbol: "PLUME",
   },
-  [CHAIN_ID_MEZO]: {
+  [chainToChainId("Mezo")]: {
     decimals: 18,
     symbol: "BTC",
   },
-  [CHAIN_ID_XRPLEVM]: {
+  [chainToChainId("XRPLEVM")]: {
     decimals: 18,
     symbol: "XRP",
   },
@@ -186,7 +176,7 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 6,
     symbol: "STX",
   },
-  [CHAIN_ID_XRPL]: {
+  [chainToChainId("Xrpl")]: {
     decimals: 6,
     symbol: "XRP",
   },
@@ -194,13 +184,17 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 8,
     symbol: "DOGE",
   },
-  [CHAIN_ID_ZEROGRAVITY]: {
+  [chainToChainId("ZeroGravity")]: {
     decimals: 18,
     symbol: "0G",
   },
-  [CHAIN_ID_NEXUS]: {
+  [chainToChainId("Nexus")]: {
     decimals: 18,
     symbol: "NEX",
+  },
+  [chainToChainId("Tempo")]: {
+    decimals: 6,
+    symbol: "pathUSD",
   },
 };
 
