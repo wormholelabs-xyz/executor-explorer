@@ -261,6 +261,8 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
     } else if (chainId === chainToChainId("Tempo")) {
       if (currentEnv === "Testnet") {
         link = `https://explore.moderato.tempo.xyz/tx/${txHash}`;
+      } else {
+        link = `https://explore.tempo.xyz/tx/${txHash}`;
       }
       name = "Tempo Explorer";
     } else if (chainId === chainToChainId("Sepolia")) {
