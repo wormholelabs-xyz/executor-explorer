@@ -9,6 +9,9 @@ import { useHistory, useLocation } from "react-router-dom";
 
 type Env = "Mainnet" | "Testnet";
 
+export const MAINNET_EXECUTOR_URL = "https://executor.labsapis.com";
+export const TESTNET_EXECUTOR_URL = "https://executor-testnet.labsapis.com";
+
 type NetworkContextValue = {
   currentEnv: Env;
   currentNetwork: string;
@@ -17,13 +20,14 @@ type NetworkContextValue = {
 };
 
 const defaultEnv = "Mainnet";
-const defaultNetwork = "";
+const defaultNetworkForEnv = (env: Env): string =>
+  env === "Testnet" ? TESTNET_EXECUTOR_URL : MAINNET_EXECUTOR_URL;
 const urlParamEnvKey = "env";
 const urlParamNetworkKey = "endpoint";
 
 const NetworkContext = React.createContext<NetworkContextValue>({
   currentEnv: defaultEnv,
-  currentNetwork: defaultNetwork,
+  currentNetwork: defaultNetworkForEnv(defaultEnv),
   setCurrentEnv: () => {},
   setCurrentNetwork: () => {},
 });
@@ -44,7 +48,7 @@ export const NetworkContextProvider = ({
       const urlEnv = urlParams.get(urlParamEnvKey);
       const urlNetwork = urlParams.get(urlParamNetworkKey);
       const currentEnv = coalesceEnv(urlEnv);
-      const currentNetwork = urlNetwork || defaultNetwork;
+      const currentNetwork = urlNetwork || defaultNetworkForEnv(currentEnv);
       return { urlParams, urlEnv, urlNetwork, currentEnv, currentNetwork };
     }, [search]);
   const setCurrentEnv = useCallback(
