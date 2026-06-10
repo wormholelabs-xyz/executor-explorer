@@ -30,7 +30,11 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_ARC, CHAIN_ID_CODEX, CHIAN_ID_DOGECOIN } from "../utils/consts";
+import {
+  CHAIN_ID_ARC,
+  CHAIN_ID_CODEX,
+  CHIAN_ID_DOGECOIN,
+} from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
