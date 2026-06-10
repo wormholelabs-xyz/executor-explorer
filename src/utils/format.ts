@@ -1,7 +1,7 @@
 import { chainToChainId } from "@wormhole-foundation/sdk-base";
 import { formatUnits } from "viem";
 import { SIGNED_QUOTE_DECIMALS } from "../layouts/signedQuote";
-import { CHAIN_ID_CODEX, CHIAN_ID_DOGECOIN } from "./consts";
+import { CHAIN_ID_ARC, CHAIN_ID_CODEX, CHIAN_ID_DOGECOIN } from "./consts";
 
 export const ScaledMath = {
   normalize(amount: bigint, from: number, to: number) {
@@ -195,6 +195,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
   [chainToChainId("Tempo")]: {
     decimals: 6,
     symbol: "pathUSD",
+  },
+  [CHAIN_ID_ARC]: {
+    decimals: 18,
+    symbol: "USDC",
   },
 };
 
