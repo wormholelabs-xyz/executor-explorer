@@ -30,7 +30,11 @@ import {
   formatRequestType,
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
-import { CHAIN_ID_CODEX, CHIAN_ID_DOGECOIN } from "../utils/consts";
+import {
+  CHAIN_ID_ARC,
+  CHAIN_ID_CODEX,
+  CHIAN_ID_DOGECOIN,
+} from "../utils/consts";
 
 function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
   const { currentEnv } = useNetworkContext();
@@ -115,6 +119,13 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.codex.xyz/tx/${txHash}`;
       }
       name = "Codex Explorer";
+    } else if (chainId === CHAIN_ID_ARC) {
+      if (currentEnv === "Testnet") {
+        link = `https://testnet.arcscan.app/tx/${txHash}`;
+      } else {
+        // mainnet is not live yet
+      }
+      name = "Arc Explorer";
     } else if (chainId === chainToChainId("Moonbeam")) {
       if (currentEnv === "Testnet") {
         link = `https://moonriver.moonscan.io/tx/${txHash}`;
