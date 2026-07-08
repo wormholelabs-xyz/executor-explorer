@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import Network from "../components/Network";
 import Settings from "../components/Settings";
+import Addresses from "./Addresses";
 import Home from "./Home";
 import Tx from "./Tx";
 
@@ -45,6 +46,22 @@ function NavLinks() {
       >
         <Typography variant="h6" sx={{ pl: 0.75 }}>
           🪓 Executor Explorer
+        </Typography>
+      </NavLink>
+      <NavLink
+        to={`/addresses${search}`}
+        exact
+        component={NavButton}
+        color="inherit"
+        activeStyle={{ borderBottom: "2px solid", paddingBottom: 4 }}
+        style={{
+          textTransform: "none",
+          borderRadius: 0,
+          minWidth: 0,
+        }}
+      >
+        <Typography variant="subtitle1" sx={{ px: 0.75 }}>
+          Addresses
         </Typography>
       </NavLink>
     </>
@@ -80,6 +97,9 @@ function Main() {
         <Switch>
           <Route path={["/tx/:hash", "/chain/:id/tx/:hash"]} exact>
             <Tx />
+          </Route>
+          <Route path="/addresses" exact>
+            <Addresses />
           </Route>
           <Route path="/" exact>
             <Home />
