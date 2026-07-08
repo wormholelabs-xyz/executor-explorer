@@ -5,3 +5,5 @@ export const CHIAN_ID_DOGECOIN = 65;
 
 // Not in the SDK yet; Arc Testnet (EVM chain ID 5042002)
 export const CHAIN_ID_ARC = 71;
+
+export const REGISTRY_API_URL = "https://registry-api.wormholelabs.xyz";
