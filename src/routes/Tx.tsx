@@ -31,8 +31,8 @@ import {
 } from "../utils/format";
 import prettifyAxiosError from "../utils/prettifyAxiosError";
 import {
-  CHAIN_ID_ARC,
   CHAIN_ID_CODEX,
+  CHAIN_ID_SCROLL,
   CHIAN_ID_DOGECOIN,
 } from "../utils/consts";
 
@@ -119,13 +119,6 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://explorer.codex.xyz/tx/${txHash}`;
       }
       name = "Codex Explorer";
-    } else if (chainId === CHAIN_ID_ARC) {
-      if (currentEnv === "Testnet") {
-        link = `https://testnet.arcscan.app/tx/${txHash}`;
-      } else {
-        // mainnet is not live yet
-      }
-      name = "Arc Explorer";
     } else if (chainId === chainToChainId("Moonbeam")) {
       if (currentEnv === "Testnet") {
         link = `https://moonriver.moonscan.io/tx/${txHash}`;
@@ -192,7 +185,7 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://seitrace.com/tx/${txHash}?chain=pacific-1`;
       }
       name = "SeiTrace";
-    } else if (chainId === chainToChainId("Scroll")) {
+    } else if (chainId === CHAIN_ID_SCROLL) {
       if (currentEnv === "Testnet") {
         link = `https://sepolia.scrollscan.com/tx/${txHash}`;
       } else {
