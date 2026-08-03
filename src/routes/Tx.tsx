@@ -21,6 +21,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChainIdIcon from "../components/ChainIdIcon";
 import RawView from "../components/RawView";
+import Search from "../components/Search";
 import { useNetworkContext } from "../contexts/NetworkContext";
 import { useCapabilities } from "../hooks/useCapabilities";
 import { chainIdToName } from "../utils/chainIdToName";
@@ -629,14 +630,19 @@ function Tx() {
   const idAsNumber = parseInt(id, 10);
   const defaultChainId = Number.isFinite(idAsNumber) ? idAsNumber : undefined;
   return (
-    <Card>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="h1">
-          Transaction Details
-        </Typography>
-        <CoreTx hash={hash} defaultChainId={defaultChainId} />
-      </CardContent>
-    </Card>
+    <>
+      <Box mb={2}>
+        <Search />
+      </Box>
+      <Card>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h1">
+            Transaction Details
+          </Typography>
+          <CoreTx hash={hash} defaultChainId={defaultChainId} />
+        </CardContent>
+      </Card>
+    </>
   );
 }
 export default Tx;
