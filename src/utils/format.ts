@@ -204,6 +204,10 @@ const CHAIN_ID_TO_TOKEN_INFO: {
     decimals: 18,
     symbol: "WETH",
   },
+  [chainToChainId("Robinhood")]: {
+    decimals: 18,
+    symbol: "ETH",
+  },
 };
 
 function tokensToUsd(amount: bigint, decimals: number, price: bigint) {
