@@ -82,6 +82,10 @@ export const CHAIN_EXPLORERS: Record<string, ChainExplorer> = {
     url: "https://amoy.polygonscan.com",
     account: "address/",
   },
+  robinhood: {
+    url: "https://robinhoodchain.blockscout.com",
+    account: "address/",
+  },
   scroll: { url: "https://scrollscan.com", account: "address/" },
   seievm: { url: "https://seitrace.com", account: "address/" },
   "seievm-testnet": { url: "https://seistream.app", account: "address/" },
