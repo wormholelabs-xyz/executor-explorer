@@ -161,6 +161,10 @@ function ExplorerTx({ txHash, chainId }: { txHash: string; chainId: number }) {
         link = `https://megaeth.blockscout.com/tx/${txHash}`;
       }
       name = "MegaETH Explorer";
+    } else if (chainId === chainToChainId("Robinhood")) {
+      // mainnet-only chain
+      link = `https://robinhoodchain.blockscout.com/tx/${txHash}`;
+      name = "Robinhood Chain Explorer";
     } else if (chainId === chainToChainId("CreditCoin")) {
       if (currentEnv === "Testnet") {
         link = `https://creditcoin-testnet.blockscout.com/tx/${txHash}`;
